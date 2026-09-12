@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bound settings</title>
+    <link rel="stylesheet" href="popup.css" />
+    <style>
+      body {
+        max-width: 640px;
+        margin: 0 auto;
+        min-width: 0;
+      }
+      .shell {
+        padding: 28px 20px 40px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      h2 {
+        font-size: 15px;
+        margin: 22px 0 8px;
+      }
+      .steps {
+        margin: 0 0 16px;
+        padding-left: 18px;
+        color: #d9d0c3;
+      }
+      .steps li {
+        margin: 6px 0;
+      }
+      code {
+        font-family: ui-monospace, Menlo, Consolas, monospace;
+        font-size: 12px;
+        background: #10171e;
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="top">
+        <div class="brand">
+          <span class="mark" aria-hidden="true"></span>
+          <div>
+            <h1>Bound settings</h1>
+            <p class="tag">On-device by default. Optional ChatGPT for harder snippets.</p>
+          </div>
+        </div>
+      </header>
+
+      <h2>How analysis runs</h2>
+      <p class="hint">
+        Bound always ships with an on-device checker: nested loops, recursion, sorts, binary search, hash maps, and
+        common contest patterns. No account is required. If you turn on OpenAI, the code Bound extracts is sent to that
+        API so a model can name best / average / worst bounds.
+      </p>
+
+      <h2>Hook up ChatGPT (OpenAI)</h2>
+      <ol class="steps">
+        <li>Create an API key at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>. This is billed to your OpenAI account, not through Bound.</li>
+        <li>Choose <strong>OpenAI / ChatGPT</strong> as the engine below.</li>
+        <li>Paste the key. Bound stores it in <code>chrome.storage.local</code> on this machine only — it is not uploaded anywhere else.</li>
+        <li>Keep the model at <code>gpt-4o-mini</code> unless you want a larger model.</li>
+        <li>Save, then click the Bound icon (or press <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>) on a page with code.</li>
+      </ol>
+
+      <h2>Hook up another OpenAI-compatible server</h2>
+      <p class="hint">
+        Anything that implements <code>POST /chat/completions</code> works: Azure OpenAI, a proxy, or a local server such as
+        Ollama at <code>http://localhost:11434/v1</code> with model <code>llama3.1</code>. Chrome will ask you to allow access to
+        that host the first time you save.
+      </p>
+
+      <label class="field">
+        <span>Engine</span>
+        <select id="engine">
+          <option value="local">On-device (no API key)</option>
+          <option value="openai">OpenAI / ChatGPT / compatible API</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>API key</span>
+        <input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-… (or leave blank for a local server)" />
+      </label>
+      <label class="field">
+        <span>Model</span>
+        <input id="model" type="text" spellcheck="false" placeholder="gpt-4o-mini" />
+      </label>
+      <label class="field">
+        <span>API base URL</span>
+        <input id="base-url" type="url" spellcheck="false" placeholder="https://api.openai.com/v1" />
+      </label>
+      <div class="row">
+        <button type="button" class="primary" id="save">Save settings</button>
+        <span class="status" id="save-status" role="status"></span>
+      </div>
+      <p class="fine" id="error"></p>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "bound",
+  "private": true,
+  "description": "Chrome extension that estimates Big-O time bounds for code on the page.",
+  "scripts": {
+    "test": "node tests/analyzer.test.js && node tests/ai.test.js",
+    "icons": "python3 scripts/generate-icons.py"
+  }
+}
