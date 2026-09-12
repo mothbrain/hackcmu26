@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bound sample page</title>
+    <style>
+      body {
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        background: #121820;
+        color: #f3ece0;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 32px 20px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      p {
+        color: #9aa7b3;
+      }
+      pre,
+      textarea {
+        width: 100%;
+        background: #0d1318;
+        color: #d7e0ea;
+        border: 1px solid #2a3846;
+        border-radius: 8px;
+        padding: 12px;
+        font: 13px/1.45 ui-monospace, Menlo, Consolas, monospace;
+        box-sizing: border-box;
+      }
+      textarea {
+        min-height: 180px;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sample code for Bound</h1>
+    <p>
+      Load the unpacked extension, keep this tab focused, and click Bound. It should pick the editor-like textarea if
+      you have typed there, otherwise the Python snippet below.
+    </p>
+    <h2>Editor stand-in</h2>
+    <textarea id="editor">
+function twoSum(nums, target) {
+  const seen = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const need = target - nums[i];
+    if (seen.has(need)) return [seen.get(need), i];
+    seen.set(nums[i], i);
+  }
+  return [];
+}
+</textarea>
+    <h2>Code block</h2>
+    <pre><code>def merge_sort(arr):
+    if len(arr) &lt;= 1:
+        return arr
+    mid = len(arr) // 2
+    return merge(merge_sort(arr[:mid]), merge_sort(arr[mid:]))
+
+def merge(a, b):
+    out = []
+    i = j = 0
+    while i &lt; len(a) and j &lt; len(b):
+        if a[i] &lt; b[j]:
+            out.append(a[i]); i += 1
+        else:
+            out.append(b[j]); j += 1
+    return out + a[i:] + b[j:]
+</code></pre>
+  </body>
+</html>

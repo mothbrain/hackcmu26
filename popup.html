@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bound</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="top">
+        <div class="brand">
+          <span class="mark" aria-hidden="true"></span>
+          <div>
+            <h1>Bound</h1>
+            <p class="tag">Time complexity of the code in view</p>
+          </div>
+        </div>
+        <button type="button" class="gear" id="settings-toggle" aria-expanded="false" aria-controls="settings-panel">
+          Settings
+        </button>
+      </header>
+
+      <section class="panel hidden" id="settings-panel" hidden>
+        <p class="hint">
+          On-device analysis works with no key. To use ChatGPT, paste an OpenAI API key. Keys stay in this browser.
+        </p>
+        <label class="field">
+          <span>Engine</span>
+          <select id="engine">
+            <option value="local">On-device (no API key)</option>
+            <option value="openai">OpenAI / ChatGPT</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>API key</span>
+          <input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-…" />
+        </label>
+        <label class="field">
+          <span>Model</span>
+          <input id="model" type="text" spellcheck="false" placeholder="gpt-4o-mini" />
+        </label>
+        <p class="fine">
+          Full setup, including a custom OpenAI-compatible server, is on the
+          <a href="#" id="open-options">options page</a>.
+        </p>
+        <div class="row">
+          <button type="button" class="primary" id="save-settings">Save</button>
+          <span class="status" id="save-status" role="status"></span>
+        </div>
+      </section>
+
+      <main id="main">
+        <div class="state" id="state-loading">
+          <div class="pulse" aria-hidden="true"></div>
+          <p>Reading the editor…</p>
+        </div>
+      </main>
+    </div>
+    <script src="analyzer.js"></script>
+    <script src="ai.js"></script>
+    <script src="extract.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
